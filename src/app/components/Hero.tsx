@@ -1,10 +1,9 @@
 import Link from "next/link"
 import Container from "./Container"
-import Devider from "./Divider"
 
 export default function Hero () {
   return (
-    <section className="pt-24 pb-20">
+    <section className="pt-24 pb-21.5">
       <Container>
         <div className="grid grid-cols-[1.1fr_0.9fr] gap-14 items-center">
           <div className="flex flex-col flex-1">
