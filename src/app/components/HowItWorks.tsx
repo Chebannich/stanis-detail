@@ -3,14 +3,14 @@ import { steps } from "@/data/steps";
 
 export default function HowItWorks () {
   return (
-   <section className="py-22">
+   <section className="py-12 md:py-22">
       <Container>
         <div className="px-8">
           <div>
             <h3 className="font-heading text-xs font-semibold tracking-[0.16em] uppercase text-accent">Ablauf</h3>
             <h2 className="font-heading text-3xl font-semibold leading-[1.6] text-silver-100 mt-3.5 mb-14">Vier Schritte bis zum Termin</h2>
           </div>
-          <div className="grid grid-cols-4 gap-0">
+          <div className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
             {steps.map((step) => (
               <div className="py-6 pr-5.5" key={step.name}>
                 <div className="font-heading font-semibold text-[13px] text-accent mb-2.5 tracking-[0.04em]">0{step.number}</div>

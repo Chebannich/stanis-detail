@@ -3,12 +3,12 @@ import Container from "./Container"
 
 export default function Hero () {
   return (
-    <section className="pt-24 pb-21.5">
+    <section className="py-12 md:pt-24 md:pb-21.5">
       <Container>
-        <div className="grid grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+        <div className="grid grid-cols-1 px-8 lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
           <div className="flex flex-col flex-1">
             <h3 className="font-heading text-xs font-semibold tracking-[0.16em] uppercase text-accent">Mobile Innenraum-Aufbereitung · Versmold & Umgebung</h3>
-            <h1 className="font-heading text-[56px] font-semibold leading-[1.12] tracking-[-0.01em] mt-4.5 mb-5.5
+            <h1 className="font-heading text-[44px] lg:text-[56px] font-semibold leading-[1.12] tracking-[-0.01em] mt-4.5 mb-5.5
                           text-transparent bg-clip-text bg-[linear-gradient(110deg,var(--color-silver-400)_0%,var(--color-silver-100)_25%,#ffffff_32%,var(--color-silver-100)_40%,var(--color-silver-600)_60%)]
                           bg-[length:220%_100%] animate-sweep">
               Dein Innenraum.<br />

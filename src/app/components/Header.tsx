@@ -14,13 +14,13 @@ export default function Header () {
             Stanis <b className="text-accent font-semibold">Detail</b>
           </div>
         </div>
-        <ul className="flex gap-8 text-sm text-silver-400">
+        <ul className="hidden lg:flex gap-8 text-sm text-silver-400">
           <li><Link href={'#pricing'}>Leistungen</Link></li>
           <li><Link href={'#howItWorks'}>Ablauf</Link></li>
           <li><Link href={'#features'}>Warum wir</Link></li>
           <li><Link href={'#contact'}>Kontakt</Link></li>
         </ul>
-        <Link href={'#contact'} className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md">Termin anfragen</Link>
+        <Link href={'#contact'} className="hidden lg:block py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md">Termin anfragen</Link>
       </div>
      </Container>
     </header>

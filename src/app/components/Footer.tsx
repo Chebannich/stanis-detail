@@ -6,7 +6,7 @@ export default function Footer () {
     <footer className="py-11 border-t border-line">
       <Container>
         <div className="px-8">
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-3">
             <div className="text-[13px] text-silver-600">
               © 2026 StanisDetail — Mobile Fahrzeugaufbereitung, Versmold
             </div>

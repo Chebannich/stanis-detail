@@ -5,7 +5,7 @@ import { pricingTiers } from "@/data/pricingTiers";
 
 export default function Pricing () {
   return (
-    <section className="py-22">
+    <section className="py-12 md:py-22">
       <Container>
         <div className="px-8">
           <div className="max-w-140 mb-12">
@@ -15,7 +15,7 @@ export default function Pricing () {
               Der Preis richtet sich nach Fahrzeuggröße — hier die Einstiegspreise je Paket. Fest, transparent, ohne Überraschungen.
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {pricingTiers.map((tier) => (
               <div className="bg-surface border border-line rounded-xl py-8 px-6.5 flex flex-col" key={tier.name}>
                 <h4 className="text-[19px] font-semibold text-silver-100">{tier.name}</h4>

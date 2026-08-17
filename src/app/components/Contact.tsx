@@ -23,7 +23,7 @@ export default function Contact () {
   }
 
   return (
-   <section className="py-22">
+   <section className="py-12 md:py-22">
       <Container>
         <div className="px-8">
           <div className="max-w-140 mb-12">
@@ -31,9 +31,9 @@ export default function Contact () {
             <h2 className="font-heading text-3xl font-semibold leading-[1.6] text-silver-100 mt-3.5">Termin anfragen</h2>
             <p className="text-[15px] leading-[1.6] text-silver-400 mt-3">Formular ausfüllen — wir melden uns innerhalb eines Tages mit einem Terminvorschlag.</p>
           </div>
-          <div className="grid grid-cols-[1.2fr_0.8fr] gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8">
             <form onSubmit={handleSubmit} className="bg-surface border border-line rounded-xl p-8 flex flex-col gap-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="text-[12.5px] text-silver-400 mb-1.5 block">Name</label>
                   <input id="name" name="name" type="text" placeholder="Dein Name" value={formData.name} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
@@ -43,7 +43,7 @@ export default function Contact () {
                   <input id="contactWay" name="contactWay" type="text" placeholder="+49 ... oder name@mail.de" value={formData.contactWay} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="vehicle" className="text-[12.5px] text-silver-400 mb-1.5 block">Fahrzeugmodell</label>
                   <input id="vehicle" name="vehicle" type="text" placeholder="z. B. VW Golf 7" value={formData.vehicle} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
@@ -62,7 +62,7 @@ export default function Contact () {
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none"></textarea>
               </div>
-              <button type="submit" className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-1/3">
+              <button type="submit" className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3">
                 Anfrage senden
               </button>
             </form>
