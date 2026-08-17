@@ -5,11 +5,13 @@ import Link from "next/link"
 import Container from "./Container"
 
 export default function Contact () {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
   const [ formData, setFormData ] = useState({
     name: "",
     contactWay: "",
     vehicle: "",
-    packet: "",
+    packet: "Basic",
     message: "",
   });
 
@@ -17,10 +19,32 @@ export default function Contact () {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
-  function handleSubmit (e: React.SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(formData);
-  }
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  e.preventDefault();
+  setStatus('sending');
+
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        setStatus('success');
+        setFormData({
+          name: "",
+          contactWay: "",
+          vehicle: "",
+          packet: "",
+          message: "",
+        });
+      } else {
+        setStatus('error');
+      }
+    })
+    .catch(() => setStatus('error'));
+}
 
   return (
    <section className="py-12 md:py-22">
@@ -62,9 +86,17 @@ export default function Contact () {
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none"></textarea>
               </div>
-              <button type="submit" className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3">
-                Anfrage senden
+              <button type="submit" disabled={status === 'sending'} className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                {status === 'sending' ? 'Wird gesendet...' : 'Anfrage senden'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-sm text-accent">Danke! Wir melden uns innerhalb eines Tages.</p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-red-400">Etwas ist schiefgelaufen. Bitte versuch es erneut.</p>
+              )}
+
             </form>
             <div className="flex flex-col gap-6">
               <div className="bg-surface border border-line rounded-xl p-6 flex flex-col">
