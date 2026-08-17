@@ -14,8 +14,11 @@ export default function Home() {
       <Hero/>
       <Divider/>
       <Pricing/>
+      <Divider/>
       <HowItWorks/>
+      <Divider/>
       <Features/>
+      <Divider/>
       <Contact/>
       <Footer/>
     </main>
