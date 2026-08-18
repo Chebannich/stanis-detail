@@ -20,6 +20,7 @@
 
 @theme {
   --animate-sweep: sweep 6s ease-in-out infinite;
+  --animate-sweep-fast: sweep 3s ease-in-out infinite;
 }
 
 @keyframes sweep {

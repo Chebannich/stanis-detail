@@ -11,9 +11,9 @@ export default function Footer () {
               © 2026 StanisDetail — Mobile Fahrzeugaufbereitung, Versmold
             </div>
             <div className="flex flex-row gap-1 items-center text-[13px] text-silver-600">
-              <Link href={"https://www.instagram.com/stanisdetail"} target="_blank" rel="noopener noreferrer">Instagram</Link>
+              <Link href={"https://www.instagram.com/stanisdetail"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-silver-100">Instagram</Link>
               <span>·</span>
-              <Link href={"https://www.tiktok.com/@stanisdetail"} target="_blank" rel="noopener noreferrer">TikTok</Link>
+              <Link href={"https://www.tiktok.com/@stanisdetail"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-silver-100">TikTok</Link>
             </div>
           </div>
         </div>

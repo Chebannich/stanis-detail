@@ -15,12 +15,12 @@ export default function Header () {
           </div>
         </div>
         <ul className="hidden lg:flex gap-8 text-sm text-silver-400">
-          <li><Link href={'#pricing'}>Leistungen</Link></li>
-          <li><Link href={'#howItWorks'}>Ablauf</Link></li>
-          <li><Link href={'#features'}>Warum wir</Link></li>
-          <li><Link href={'#contact'}>Kontakt</Link></li>
+          <li><Link href={'#pricing'} className="relative hover:text-silver-100 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full">Leistungen</Link></li>
+          <li><Link href={'#howItWorks'} className="relative hover:text-silver-100 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full">Ablauf</Link></li>
+          <li><Link href={'#features'} className="relative hover:text-silver-100 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full">Warum wir</Link></li>
+          <li><Link href={'#contact'} className="relative hover:text-silver-100 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full">Kontakt</Link></li>
         </ul>
-        <Link href={'#contact'} className="hidden lg:block py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md">Termin anfragen</Link>
+        <Link href={'#contact'} className="hidden lg:block py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">Termin anfragen</Link>
       </div>
      </Container>
     </header>

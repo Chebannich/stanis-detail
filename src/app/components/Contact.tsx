@@ -60,21 +60,21 @@ export default function Contact () {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="text-[12.5px] text-silver-400 mb-1.5 block">Name</label>
-                  <input id="name" name="name" type="text" placeholder="Dein Name" value={formData.name} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
+                  <input id="name" name="name" type="text" placeholder="Dein Name" value={formData.name} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent" />
                 </div>
                 <div>
                   <label htmlFor="contactWay" className="text-[12.5px] text-silver-400 mb-1.5 block">Telefon oder E-Mail</label>
-                  <input id="contactWay" name="contactWay" type="text" placeholder="+49 ... oder name@mail.de" value={formData.contactWay} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
+                  <input id="contactWay" name="contactWay" type="text" placeholder="+49 ... oder name@mail.de" value={formData.contactWay} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="vehicle" className="text-[12.5px] text-silver-400 mb-1.5 block">Fahrzeugmodell</label>
-                  <input id="vehicle" name="vehicle" type="text" placeholder="z. B. VW Golf 7" value={formData.vehicle} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none" />
+                  <input id="vehicle" name="vehicle" type="text" placeholder="z. B. VW Golf 7" value={formData.vehicle} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent" />
                 </div>
                 <div>
                   <label htmlFor="packet" className="text-[12.5px] text-silver-400 mb-1.5 block">Gewünschtes Paket</label>
-                  <select id="packet" name="packet" value={formData.packet} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none">
+                  <select id="packet" name="packet" value={formData.packet} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent">
                     <option value="basic">Basic</option>
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
@@ -84,9 +84,9 @@ export default function Contact () {
               </div>
               <div>
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
-                <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none"></textarea>
+                <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent"></textarea>
               </div>
-              <button type="submit" disabled={status === 'sending'} className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+              <button type="submit" disabled={status === 'sending'} className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">
                 {status === 'sending' ? 'Wird gesendet...' : 'Anfrage senden'}
               </button>
 
@@ -115,10 +115,10 @@ export default function Contact () {
                   Vorher-Nachher-Ergebnisse auf Instagram und TikTok.
                 </p>
                 <div className="flex gap-3 mt-3.5">
-                  <Link href={"https://www.instagram.com/stanisdetail"} target="_blank" rel="noopener noreferrer" className="border border-line rounded-md py-2.75 px-3.5 text-[13px] text-silver-300">@stanisdetail · Instagram</Link>
+                  <Link href={"https://www.instagram.com/stanisdetail"} target="_blank" rel="noopener noreferrer" className="border border-line rounded-md py-2.75 px-3.5 text-[13px] text-silver-300 transition-colors hover:border-accent">@stanisdetail · Instagram</Link>
                 </div>
                 <div className="flex gap-3 mt-3.5">
-                  <Link href={"https://www.tiktok.com/@stanisdetail"} target="_blank" rel="noopener noreferrer" className="border border-line rounded-md py-2.75 px-3.5 text-[13px] text-silver-300">@stanisdetail · TikTok</Link>
+                  <Link href={"https://www.tiktok.com/@stanisdetail"} target="_blank" rel="noopener noreferrer" className="border border-line rounded-md py-2.75 px-3.5 text-[13px] text-silver-300 transition-colors hover:border-accent">@stanisdetail · TikTok</Link>
                 </div>
               </div>
             </div>

@@ -16,8 +16,8 @@ export default function Hero () {
             </h1>
             <p className="text-[17px] text-silver-400 max-w-115 mb-8 leading-[1.6]">Professionelle Fahrzeugaufbereitung mit Koch-Chemie-Produkten — wir kommen zu dir nach Hause oder zur Arbeit. Kein Werkstattbesuch, kein Zeitverlust.</p>
             <div className="flex gap-3.5 flex-wrap mb-11 font-heading font-semibold tracking-[0.02em] text-[14px]">
-              <Link href={'#contact'} className="border border-transparent py-3.5 px-6.5 rounded-md bg-linear-135 from-accent-light to-accent text-on-accent">Termin anfragen</Link>
-              <Link href={'#pricing'} className="border border-line-strong py-3.5 px-6.5 rounded-md">Leistungen ansehen</Link>
+              <Link href={'#contact'} className="border border-transparent py-3.5 px-6.5 rounded-md bg-linear-135 from-accent-light to-accent text-on-accent bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">Termin anfragen</Link>
+              <Link href={'#pricing'} className="border border-line-strong py-3.5 px-6.5 rounded-md hover:border-accent">Leistungen ansehen</Link>
             </div>
             <ul className="flex flex-col gap-3 max-w-105 leading-[1.6] text-[14px] text-silver-300">
               <li className="flex items-baseline gap-2.5"><span className="text-[10px] text-accent">●</span>Kein Anfahrtsweg für dich — wir kommen vorbei</li>

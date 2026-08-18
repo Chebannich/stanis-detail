@@ -17,7 +17,7 @@ export default function Pricing () {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {pricingTiers.map((tier) => (
-              <div className="bg-surface border border-line rounded-xl py-8 px-6.5 flex flex-col" key={tier.name}>
+              <div className="bg-surface border border-line rounded-xl py-8 px-6.5 flex flex-col transition-all duration-500 hover:border-accent hover:scale-108 hover:shadow-[0_0_40px_rgba(125,139,160,0.25)]" key={tier.name}>
                 <h4 className="text-[19px] font-semibold text-silver-100">{tier.name}</h4>
                 <div className="font-heading text-[28px] font-semibold mt-3.5 mb-1.5 text-silver-100">
                   ab {tier.price}&nbsp;€
@@ -28,7 +28,7 @@ export default function Pricing () {
                     <li className="flex gap-2.5 items-start before:content-['—'] before:text-accent" key={benefit}>{benefit}</li>
                   ))}
                 </ul>
-                <Link href={'#contact'} className="border border-line-strong text-silver-100 bg-transparent flex items-center justify-center py-2.75 px-5.5 mt-4.5 rounded-md font-heading text-[13px] font-semibold tracking-[0.02em]">Auswählen</Link>
+                <Link href={'#contact'} className="border border-line-strong text-silver-100 bg-transparent flex items-center justify-center py-2.75 px-5.5 mt-4.5 rounded-md font-heading text-[13px] font-semibold tracking-[0.02em] transition-colors hover:border-accent">Auswählen</Link>
               </div>
             ))}
           </div>
