@@ -3,7 +3,7 @@ import { features } from "@/data/features";
 
 export default function Features () {
   return (
-    <section className="py-12 md:py-22">
+    <section id="features" className="py-12 md:py-22">
       <Container>
         <div className="px-8">
           <h3 className="font-heading text-xs font-semibold tracking-[0.16em] uppercase text-accent">Warum StanisDetail</h3>

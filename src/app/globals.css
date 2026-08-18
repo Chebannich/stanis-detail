@@ -27,6 +27,10 @@
   50% { background-position: 0% 0; }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-silver-100);

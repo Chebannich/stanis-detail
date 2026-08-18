@@ -3,7 +3,7 @@ import { steps } from "@/data/steps";
 
 export default function HowItWorks () {
   return (
-   <section className="py-12 md:py-22">
+   <section id="howItWorks" className="py-12 md:py-22">
       <Container>
         <div className="px-8">
           <div>
