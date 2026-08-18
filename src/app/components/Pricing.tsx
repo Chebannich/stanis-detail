@@ -1,9 +1,18 @@
-import Link from "next/link"
+"use client";
+
 import Container from "./Container"
 import { pricingTiers } from "@/data/pricingTiers";
 
+type PricingProps = {
+  onSelectPackage: (packageName: string) => void;
+}
 
-export default function Pricing () {
+export default function Pricing ({ onSelectPackage }: PricingProps) {
+  function handleSelect(packageName: string) {
+    onSelectPackage(packageName);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <section id="pricing" className="py-12 md:py-22">
       <Container>
@@ -28,7 +37,7 @@ export default function Pricing () {
                     <li className="flex gap-2.5 items-start before:content-['—'] before:text-accent" key={benefit}>{benefit}</li>
                   ))}
                 </ul>
-                <Link href={'#contact'} className="border border-line-strong text-silver-100 bg-transparent flex items-center justify-center py-2.75 px-5.5 mt-4.5 rounded-md font-heading text-[13px] font-semibold tracking-[0.02em] transition-colors hover:border-accent">Auswählen</Link>
+                <button onClick={() => handleSelect(tier.name.toLowerCase())} className="border border-line-strong text-silver-100 bg-transparent flex items-center justify-center py-2.75 px-5.5 mt-4.5 rounded-md font-heading text-[13px] font-semibold tracking-[0.02em] transition-colors hover:border-accent">Auswählen</button>
               </div>
             ))}
           </div>

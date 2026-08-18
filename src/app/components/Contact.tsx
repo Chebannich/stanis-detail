@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link"
 import Container from "./Container"
 
-export default function Contact () {
+type ContactProps = {
+  selectedPackage: string | null;
+}
+
+export default function Contact({ selectedPackage }: ContactProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const [ formData, setFormData ] = useState({
@@ -14,6 +18,12 @@ export default function Contact () {
     packet: "Basic",
     message: "",
   });
+
+  useEffect(() => {
+    if (selectedPackage) {
+      setFormData((prev) => ({ ...prev, packet: selectedPackage }));
+    }
+  }, [selectedPackage]);
 
   function handleChange (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     setFormData({...formData, [e.target.name]: e.target.value});
