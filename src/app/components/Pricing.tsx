@@ -1,5 +1,6 @@
 "use client";
 
+import { PromoBanner } from "./PromoBanner";
 import Container from "./Container"
 import { pricingTiers } from "@/data/pricingTiers";
 
@@ -24,7 +25,7 @@ export default function Pricing ({ onSelectPackage }: PricingProps) {
               Der Preis richtet sich nach Fahrzeuggröße — hier die Einstiegspreise je Paket. Fest, transparent, ohne Überraschungen.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             {pricingTiers.map((tier) => (
               <div className="bg-surface border border-line rounded-xl py-8 px-6.5 flex flex-col transition-all duration-500 hover:border-accent hover:scale-108 hover:shadow-[0_0_40px_rgba(125,139,160,0.25)]" key={tier.name}>
                 <h4 className="text-[19px] font-semibold text-silver-100">{tier.name}</h4>
@@ -41,6 +42,7 @@ export default function Pricing ({ onSelectPackage }: PricingProps) {
               </div>
             ))}
           </div>
+          <PromoBanner />
         </div>
       </Container>
     </section>
