@@ -13,6 +13,7 @@
   --color-on-accent: #161c24;
   --color-line: rgba(233,237,242,0.10);
   --color-line-strong: rgba(233,237,242,0.18);
+  --color-urgent: #f0653a;
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-poppins);
