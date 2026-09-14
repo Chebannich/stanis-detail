@@ -8,8 +8,34 @@ type ContactProps = {
   selectedPackage: string | null;
 }
 
+type FormErrors = {
+  name?: string;
+  contactWay?: string;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+\d][\d\s\-()]{5,}$/;
+
+function validate(formData: { name: string; contactWay: string }): FormErrors {
+  const errors: FormErrors = {};
+
+  if (!formData.name.trim()) {
+    errors.name = "Bitte gib deinen Namen an.";
+  }
+
+  const contact = formData.contactWay.trim();
+  if (!contact) {
+    errors.contactWay = "Bitte gib eine Telefonnummer oder E-Mail an.";
+  } else if (!EMAIL_RE.test(contact) && !PHONE_RE.test(contact)) {
+    errors.contactWay = "Bitte eine gültige Telefonnummer oder E-Mail angeben.";
+  }
+
+  return errors;
+}
+
 export default function Contact({ selectedPackage }: ContactProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const [ formData, setFormData ] = useState({
     name: "",
@@ -17,6 +43,7 @@ export default function Contact({ selectedPackage }: ContactProps) {
     vehicle: "",
     packet: "Basic",
     message: "",
+    website: "",
   });
 
   useEffect(() => {
@@ -26,11 +53,34 @@ export default function Contact({ selectedPackage }: ContactProps) {
   }, [selectedPackage]);
 
   function handleChange (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
-    setFormData({...formData, [e.target.name]: e.target.value});
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  }
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    if (name !== "name" && name !== "contactWay") return;
+
+    const fieldErrors = validate({ ...formData, [name]: value });
+    setErrors((prev) => ({ ...prev, [name]: fieldErrors[name as keyof FormErrors] }));
   }
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
   e.preventDefault();
+
+   if (formData.website) {
+    return;
+  }
+
+  const validationErrors = validate(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
   setStatus('sending');
 
   fetch('/api/contact', {
@@ -46,8 +96,9 @@ export default function Contact({ selectedPackage }: ContactProps) {
           name: "",
           contactWay: "",
           vehicle: "",
-          packet: "",
+          packet: "Basic",
           message: "",
+          website: "",
         });
       } else {
         setStatus('error');
@@ -70,11 +121,13 @@ export default function Contact({ selectedPackage }: ContactProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="text-[12.5px] text-silver-400 mb-1.5 block">Name</label>
-                  <input id="name" name="name" type="text" placeholder="Dein Name" value={formData.name} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent" />
+                  <input id="name" name="name" type="text" placeholder="Dein Name" value={formData.name} onChange={handleChange} onBlur={handleBlur} aria-invalid={!!errors.name} className={`w-full bg-surface-2 border rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent ${errors.name ? "border-urgent" : "border-line-strong"}`} />
+                  {errors.name && <p className="text-xs text-urgent mt-1">{errors.name}</p>}
                 </div>
                 <div>
                   <label htmlFor="contactWay" className="text-[12.5px] text-silver-400 mb-1.5 block">Telefon oder E-Mail</label>
-                  <input id="contactWay" name="contactWay" type="text" placeholder="+49 ... oder name@mail.de" value={formData.contactWay} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent" />
+                  <input id="contactWay" name="contactWay" type="text" placeholder="+49 ... oder name@mail.de" value={formData.contactWay} onChange={handleChange} onBlur={handleBlur} aria-invalid={!!errors.contactWay} className={`w-full bg-surface-2 border rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent ${errors.contactWay ? "border-urgent" : "border-line-strong"}`} />
+                  {errors.contactWay && <p className="text-xs text-urgent mt-1">{errors.contactWay}</p>}
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -88,7 +141,7 @@ export default function Contact({ selectedPackage }: ContactProps) {
                     <option value="basic">Basic</option>
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
-                    <option value="unknow">Bin mir unsicher</option>
+                    <option value="unknown">Bin mir unsicher</option>
                   </select>
                 </div>
               </div>
@@ -96,6 +149,16 @@ export default function Contact({ selectedPackage }: ContactProps) {
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent"></textarea>
               </div>
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
+              />
               <button type="submit" disabled={status === 'sending'} className="py-2.75 px-5.5 font-heading border border-transparent tracking-[0.02em] leading-[1.6] text-[13px] font-semibold text-on-accent bg-linear-110 from-accent-light to-accent rounded-md w-3/4 md:w-1/3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">
                 {status === 'sending' ? 'Wird gesendet...' : 'Anfrage senden'}
               </button>
@@ -104,7 +167,7 @@ export default function Contact({ selectedPackage }: ContactProps) {
                 <p className="text-sm text-accent">Danke! Wir melden uns innerhalb eines Tages.</p>
               )}
               {status === 'error' && (
-                <p className="text-sm text-red-400">Etwas ist schiefgelaufen. Bitte versuch es erneut.</p>
+                <p className="text-sm text-urgent">Etwas ist schiefgelaufen. Bitte versuch es erneut.</p>
               )}
 
             </form>
