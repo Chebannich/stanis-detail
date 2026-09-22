@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { name, contactWay, vehicle, packet, message, marketingAccepted } = body;
+  const { name, contactWay, vehicle, packet, message, marketingAccepted, source } = body;
 
   try {
     await resend.emails.send({
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
         Paket: ${packet}
         Nachricht: ${message}
         Marketing-Einwilligung: ${marketingAccepted ? "Ja" : "Nein"}
+        Source: ${source}
       `,
     });
 
