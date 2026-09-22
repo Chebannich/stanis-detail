@@ -11,12 +11,13 @@ type ContactProps = {
 type FormErrors = {
   name?: string;
   contactWay?: string;
+  privacyAccepted?: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s\-()]{5,}$/;
 
-function validate(formData: { name: string; contactWay: string }): FormErrors {
+function validate(formData: { name: string; contactWay: string; privacyAccepted: boolean }): FormErrors {
   const errors: FormErrors = {};
 
   if (!formData.name.trim()) {
@@ -29,6 +30,10 @@ function validate(formData: { name: string; contactWay: string }): FormErrors {
   } else if (!EMAIL_RE.test(contact) && !PHONE_RE.test(contact)) {
     errors.contactWay = "Bitte eine gültige Telefonnummer oder E-Mail angeben.";
   }
+
+  if (!formData.privacyAccepted) {
+    errors.privacyAccepted = "Bitte akzeptiere die Datenschutzerklärung.";
+  } 
 
   return errors;
 }
@@ -44,6 +49,8 @@ export default function Contact({ selectedPackage }: ContactProps) {
     packet: "Basic",
     message: "",
     website: "",
+    privacyAccepted: false,
+    marketingAccepted: false,
   });
 
   useEffect(() => {
@@ -51,6 +58,14 @@ export default function Contact({ selectedPackage }: ContactProps) {
       setFormData((prev) => ({ ...prev, packet: selectedPackage }));
     }
   }, [selectedPackage]);
+
+  function handleCheckbox (e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  }
 
   function handleChange (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -99,6 +114,8 @@ export default function Contact({ selectedPackage }: ContactProps) {
           packet: "Basic",
           message: "",
           website: "",
+          privacyAccepted: false,
+          marketingAccepted: false,
         });
       } else {
         setStatus('error');
@@ -149,6 +166,20 @@ export default function Contact({ selectedPackage }: ContactProps) {
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent"></textarea>
               </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="flex items-start gap-2 text-[13px] text-silver-300">
+                  <input type="checkbox" name="privacyAccepted" checked={formData.privacyAccepted} onChange={handleCheckbox} className="mt-0.5" />
+                  <span>Ich habe die <Link href="/datenschutz" className="text-accent underline">Datenschutzerklärung</Link> gelesen und akzeptiere sie. *</span>
+                </label>
+                {errors.privacyAccepted && <p className="text-xs text-urgent">{errors.privacyAccepted}</p>}
+
+                <label className="flex items-start gap-2 text-[13px] text-silver-300">
+                  <input type="checkbox" name="marketingAccepted" checked={formData.marketingAccepted} onChange={handleCheckbox} className="mt-0.5" />
+                  <span>Ich möchte über Angebote und Aktionen informiert werden (optional).</span>
+                </label>
+              </div>
+
               <input
                 type="text"
                 name="website"
