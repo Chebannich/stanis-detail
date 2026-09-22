@@ -51,6 +51,7 @@ export default function Contact({ selectedPackage }: ContactProps) {
     website: "",
     privacyAccepted: false,
     marketingAccepted: false,
+    source: "",
   });
 
   useEffect(() => {
@@ -116,6 +117,7 @@ export default function Contact({ selectedPackage }: ContactProps) {
           website: "",
           privacyAccepted: false,
           marketingAccepted: false,
+          source: "",
         });
       } else {
         setStatus('error');
@@ -165,6 +167,19 @@ export default function Contact({ selectedPackage }: ContactProps) {
               <div>
                 <label htmlFor="message" className="text-[12.5px] text-silver-400 mb-1.5 block">Nachricht</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Wunschtermin, Adresse, Besonderheiten... " className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 min-h-22.5 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent"></textarea>
+              </div>
+
+              <div>
+                <label htmlFor="source" className="text-[12.5px] text-silver-400 mb-1.5 block">Wie hast du von uns erfahren?</label>
+                <select id="source" name="source" value={formData.source} onChange={handleChange} className="w-full bg-surface-2 border border-line-strong rounded-md py-2.75 px-3 text-silver-100 text-[14px] outline-none transition-colors focus:border-accent">
+                  <option value="">Bitte wählen</option>
+                  <option value="flyer">Flyer</option>
+                  <option value="visitenkarte">Visitenkarte</option>
+                  <option value="kleinanzeigen">Kleinanzeigen</option>
+                  <option value="empfehlung">Empfehlung</option>
+                  <option value="social">Instagram/TikTok</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
               </div>
 
               <div className="flex flex-col gap-2">
