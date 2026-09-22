@@ -3,6 +3,7 @@
 import { PromoBanner } from "./PromoBanner";
 import Container from "./Container"
 import { pricingTiers } from "@/data/pricingTiers";
+import { scrollToSection } from "@/app/utils/scroll";
 
 type PricingProps = {
   onSelectPackage: (packageName: string) => void;
@@ -11,7 +12,7 @@ type PricingProps = {
 export default function Pricing ({ onSelectPackage }: PricingProps) {
   function handleSelect(packageName: string) {
     onSelectPackage(packageName);
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection('contact');
   }
 
   return (

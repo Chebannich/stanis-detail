@@ -1,4 +1,5 @@
 import { promoConfig } from "@/data/promo";
+import { scrollToSection } from "../utils/scroll";
 
 export function PromoBanner() {
   const { totalSpots, remainingSpots, urgencyThreshold } = promoConfig;
@@ -16,7 +17,9 @@ export function PromoBanner() {
             <div className="h-full rounded-full bg-linear-to-r from-silver-400 to-silver-100" style={{ width: `${progressPct}%` }} />
           </div>
           <p className="mb-6 text-xs text-neutral-500">{isUrgent ? `Nur noch ${remainingSpots} Plätze` : `${remainingSpots} von ${totalSpots} Plätzen frei`}</p>
-          <a href="#pricing" className="inline-block font-heading font-semibold tracking-[0.02em] text-sm border border-transparent py-2.5 px-6 rounded-md bg-linear-135 from-accent-light to-accent text-on-accent bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">Jetzt buchen</a>
+          <button onClick={() => scrollToSection('pricing')} className="inline-block font-heading font-semibold tracking-[0.02em] text-sm border border-transparent py-2.5 px-6 rounded-md bg-linear-135 from-accent-light to-accent text-on-accent bg-[length:220%_100%] bg-[linear-gradient(110deg,var(--color-accent)_0%,var(--color-accent-light)_50%,var(--color-accent)_100%)] hover:animate-sweep-fast hover:border-accent">
+            Jetzt buchen
+          </button>
           <p className="mt-3 text-xs text-silver-600">Gilt nur bei Buchung über dieses Formular. Nicht kombinierbar mit dem Visitenkarten-Rabatt.</p>
         </div>
 
